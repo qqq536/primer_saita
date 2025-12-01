@@ -1,0 +1,807 @@
+/* ===== ПЕРЕМЕННЫЕ ===== */
+/* ===== ПОЛНОСТЬЮ СВЕТЛАЯ ТЕМА ===== */
+:root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --bg-card: #ffffff;
+    --bg-hover: #e9ecef;
+    
+    --text-primary: #000000;
+    --text-secondary: #333333;
+    --text-muted: #666666;
+    
+    --accent: #2563eb;
+    --accent-hover: #1d4ed8;
+    --success: #059669;
+    --error: #dc2626;
+    
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* ===== БАЗОВЫЕ СТИЛИ ===== */
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 0;
+    margin: 0;
+}
+
+/* ===== ШАПКА ===== */
+/* ===== ШАПКА ===== */
+header {
+    background: #424242; /* СЕРЫЙ цвет */
+    backdrop-filter: none; /* Убираем размытие */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1.5rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ffffff; /* БЕЛЫЙ текст */
+    background: none; /* Убираем градиент */
+    -webkit-text-fill-color: unset;
+}
+
+/* ===== НАВИГАЦИЯ ===== */
+nav {
+    display: flex;
+    gap: 2.5rem;
+}
+
+nav a {
+    color: #e0e0e0; /* СВЕТЛО-СЕРЫЙ текст */
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-small);
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+nav a::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #ffffff; /* БЕЛАЯ полоска */
+}
+
+nav a:hover {
+    color: #ffffff; /* БЕЛЫЙ при наведении */
+}
+
+/* ===== ОСНОВНОЙ КОНТЕНТ ===== */
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* ===== КОНТЕЙНЕР НОВОСТЕЙ ===== */
+#news-container {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+}
+
+/* ===== КАРТОЧКА НОВОСТИ ===== */
+.news-item {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.news-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--accent), var(--success));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.news-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    background: var(--bg-hover);
+}
+
+.news-item:hover::before {
+    opacity: 1;
+}
+
+.news-item h2 {
+    color: var(--text-primary);
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+
+.news-meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.author, .date {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.news-content {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    font-size: 1rem;
+}
+
+/* ===== МЕДИА-КОНТЕНТ ===== */
+.news-media {
+    margin: 1.5rem 0;
+    border-radius: var(--radius-small);
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.news-media img,
+.news-media video {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.news-media img:hover,
+.news-media video:hover {
+    transform: scale(1.02);
+}
+
+.news-media audio {
+    width: 100%;
+    border-radius: var(--radius-small);
+}
+
+/* ===== ФОРМЫ ===== */
+.news-form {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+input, textarea, select {
+    width: 100%;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-small);
+    color: var(--text-primary);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 0 3px rgba(187, 134, 252, 0.1);
+}
+
+input::placeholder, textarea::placeholder {
+    color: var(--text-muted);
+}
+
+/* ===== КНОПКИ ===== */
+.btn {
+    background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: var(--radius-small);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(187, 134, 252, 0.3);
+}
+
+.delete-btn {
+    background: linear-gradient(135deg, var(--error), #b00020);
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+
+.delete-btn:hover {
+    box-shadow: 0 8px 25px rgba(207, 102, 121, 0.3);
+}
+
+/* ===== СООБЩЕНИЯ ===== */
+.success {
+    background: rgba(3, 218, 198, 0.1);
+    color: var(--success);
+    padding: 1rem;
+    border-radius: var(--radius-small);
+    border: 1px solid rgba(3, 218, 198, 0.3);
+    margin: 1rem 0;
+}
+
+.error {
+    background: rgba(207, 102, 121, 0.1);
+    color: var(--error);
+    padding: 1rem;
+    border-radius: var(--radius-small);
+    border: 1px solid rgba(207, 102, 121, 0.3);
+    margin: 1rem 0;
+}
+
+.loading, .no-news {
+    text-align: center;
+    padding: 3rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+/* ===== АДМИН-ПАНЕЛЬ ===== */
+.news-admin-item {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin: 1rem 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.news-admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.news-admin-header h3 {
+    color: var(--text-primary);
+    margin: 0;
+    flex: 1;
+}
+
+.news-admin-meta {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+/* ===== АДАПТИВНОСТЬ ===== */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    nav {
+        justify-content: center;
+    }
+    
+    main {
+        padding: 1rem;
+    }
+    
+    #news-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .news-admin-header {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .news-admin-header h3 {
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* ===== АНИМАЦИИ ===== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.news-item {
+    animation: fadeIn 0.5s ease;
+}
+
+/* ===== СКРОЛЛБАР ===== */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-hover);
+}
+/* ===== СТИЛИ ДЛЯ СТАТЕЙ ===== */
+.news-content {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    font-size: 1.1rem;
+    white-space: pre-line; /* Сохраняет переносы строк */
+}
+
+/* Стили для параграфов в тексте */
+.news-content p {
+    margin-bottom: 1rem;
+    text-align: justify;
+}
+
+/* Отступы между абзацами */
+.news-content br {
+    content: "";
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+/* Стиль для длинных текстов */
+.news-item.long-article .news-content {
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+/* Выравнивание текста как в статьях */
+.news-content {
+    text-align: justify;
+    hyphens: auto;
+}
+/* Улучшенные стили для чтения */
+/* ===== КАРТОЧКА НОВОСТИ ===== */
+.news-item {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.news-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--accent), var(--success));
+}
+
+/* УБИРАЕМ ВСЕ HOVER ЭФФЕКТЫ ДЛЯ СТАТЕЙ */
+.news-item:hover {
+    transform: none;
+    box-shadow: var(--shadow);
+    background: var(--bg-card);
+}
+
+.news-item:hover::before {
+    opacity: 1; /* Полоска остаётся видимой всегда */
+}
+/* ===== UTILITY-КЛАССЫ ДЛЯ ВЫРАВНИВАНИЯ ===== */
+
+/* Выравнивание по левому краю */
+.text-left {
+    text-align: left !important;
+}
+
+.align-left {
+    text-align: left !important;
+    justify-content: flex-start !important;
+}
+
+.float-left {
+    float: left !important;
+    margin-right: 1rem !important;
+}
+
+/* Выравнивание по правому краю */
+.text-right {
+    text-align: right !important;
+}
+
+.align-right {
+    text-align: right !important;
+    justify-content: flex-end !important;
+}
+
+.float-right {
+    float: right !important;
+    margin-left: 1rem !important;
+}
+
+/* Выравнивание по центру */
+.text-center {
+    text-align: center !important;
+}
+
+
+
+
+.text-left {
+    text-align: left !important;
+}
+
+/* ===== НОВОСТИ ПО ЦЕНТРУ ===== */
+
+/* Основной контейнер новостей - центрирование */
+#news-container {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 1.5rem !important;
+    width: 100% !important;
+    max-width: 800px !important; /* Ограничиваем ширину */
+    margin: 0 auto !important; /* Центрируем весь контейнер */
+}
+
+/* Каждая карточка новости - фиксированная ширина */
+.news-item {
+    width: 100% !important;
+    max-width: 800px !important;
+    margin: 0 auto !important;
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Альтернативный вариант - через grid */
+.news-container-centered {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    justify-items: center !important;
+    gap: 1.5rem !important;
+    width: 100% !important;
+}
+
+.news-item.centered {
+    width: 100% !important;
+    max-width: 800px !important;
+}
+/* ===== СТИЛИ ДЛЯ ПОГОДЫ ===== */
+
+/* Модальное окно */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background: var(--bg-card);
+    margin: 10% auto;
+    padding: 0;
+    border-radius: var(--radius);
+    width: 90%;
+    max-width: 400px;
+    box-shadow: var(--shadow-hover);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-header {
+    background: var(--bg-secondary);
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.modal-header h2 {
+    margin: 0;
+    color: var(--text-primary);
+}
+
+.close {
+    color: var(--text-muted);
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close:hover {
+    color: var(--text-primary);
+}
+
+.modal-body {
+    padding: 2rem;
+}
+
+/* ===== СТИЛИ ДЛЯ ПОГОДЫ ===== */
+
+/* Модальное окно */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background: var(--bg-card);
+    margin: 10% auto;
+    padding: 0;
+    border-radius: var(--radius);
+    width: 90%;
+    max-width: 400px;
+    box-shadow: var(--shadow-hover);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-header {
+    background: var(--bg-secondary);
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.modal-header h2 {
+    margin: 0;
+    color: var(--text-primary);
+}
+
+.close {
+    color: var(--text-muted);
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close:hover {
+    color: var(--text-primary);
+}
+
+.modal-body {
+    padding: 2rem;
+}
+
+/* Данные погоды */
+.weather-loading {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 2rem;
+}
+
+.weather-card {
+    text-align: center;
+    padding: 1.5rem;
+    background: var(--bg-secondary);
+    border-radius: var(--radius);
+    margin-bottom: 1.5rem;
+}
+
+.weather-temp {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--accent);
+    margin: 0.5rem 0;
+}
+
+.weather-description {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    text-transform: capitalize;
+}
+
+.weather-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.weather-detail {
+    text-align: center;
+    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-small);
+}
+
+.weather-detail span {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.weather-detail strong {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+}
+
+/* Поиск погоды */
+.weather-search {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.weather-search input {
+    flex: 1;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-small);
+    color: var(--text-primary);
+}
+
+.weather-search button {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-small);
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.weather-search button:hover {
+    background: var(--accent-hover);
+}
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .video-item {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .video-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .video-player {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            background: #000;
+        }
+
+        .video-player iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-info {
+            padding: 1.5rem;
+        }
+
+        .video-info h2 {
+            color: var(--text-primary);
+            font-size: 1.3rem;
+            margin: 0 0 1rem 0;
+            line-height: 1.3;
+        }
+
+        .video-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .video-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .videos-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                padding: 0 1rem;
+            }
+            
+            .video-info {
+                padding: 1rem;
+            }
+            
+            .video-info h2 {
+                font-size: 1.1rem;
+            }
+        }
