@@ -46,7 +46,7 @@
                 </div>
             `;
 
-            fetch('weather.php')
+            fetch('Back end/weather.php')
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
@@ -165,4 +165,5 @@
 </body>
 
 </html>
+
 
