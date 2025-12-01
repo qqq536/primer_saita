@@ -28,7 +28,7 @@
     <script>
     // Загружаем новости при загрузке страницы
     function loadNews() {
-        fetch('get-news.php')
+        fetch('Back end/get-news.php')
             .then(response => response.json())
             .then(news => {
                 const container = document.getElementById('news-container');
@@ -88,7 +88,7 @@
         }
         
         // Отправляем запрос на удаление
-        fetch('delete-news.php', {
+        fetch('Back end/delete-news.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -115,3 +115,4 @@
 </body>
 
 </html>
+
