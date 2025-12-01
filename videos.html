@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Видео - Mediapolis News</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Mediapols_videos</h1>
+            <nav>
+                <a href="index.html">Главная</a>
+                <a href="admin.php">Кабинет администратора Mediapolis_news</a>
+                <a href="weather.html">Погода</a>
+                <a href="videos.html">Видео</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div id="videos-container" class="videos-grid">
+            <div class="loading">Загрузка видео...</div>
+        </div>
+    </main>
+
+    <script>
+        // Загружаем видео при загрузке страницы
+        function loadVideos() {
+            fetch('get-videos.php')
+                .then(response => response.json())
+                .then(videos => {
+                    const container = document.getElementById('videos-container');
+                    container.innerHTML = '';
+                    
+                    if (videos.error) {
+                        container.innerHTML = '<div class="error">Ошибка загрузки видео</div>';
+                        return;
+                    }
+                    
+                    if (videos.length === 0) {
+                        container.innerHTML = '<div class="no-news">Пока нет видео. Добавьте первое!</div>';
+                        return;
+                    }
+                    
+                    videos.forEach(video => {
+                        const videoItem = `
+                            <article class="video-item">
+                                <div class="video-player">
+                                    <video controls>
+                                        <source src="${video.video_url}" type="video/mp4">
+                                        Ваш браузер не поддерживает видео.
+                                    </video>
+                                </div>
+                                <div class="video-info">
+                                    <h2>${video.title}</h2>
+                                    <div class="video-meta">
+                                        <span class="author">👤 ${video.author}</span>
+                                        <span class="date">📅 ${video.created_at}</span>
+                                    </div>
+                                    ${video.description ? `<div class="video-description">${video.description}</div>` : ''}
+                                </div>
+                            </article>
+                        `;
+                        container.innerHTML += videoItem;
+                    });
+                })
+                .catch(error => {
+                    console.error('Ошибка:', error);
+                    document.getElementById('videos-container').innerHTML = 
+                        '<div class="error">Ошибка загрузки видео</div>';
+                });
+        }
+
+        // Загружаем видео при старте
+        loadVideos();
+    </script>
+
+    <style>
+        /* Стили для видео */
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .video-item {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .video-player {
+            width: 100%;
+            background: #000;
+        }
+
+        .video-player video {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: var(--radius) var(--radius) 0 0;
+        }
+
+        .video-info {
+            padding: 1.5rem;
+        }
+
+        .video-info h2 {
+            color: var(--text-primary);
+            font-size: 1.3rem;
+            margin: 0 0 1rem 0;
+            line-height: 1.3;
+        }
+
+        .video-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .video-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .videos-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                padding: 0 1rem;
+            }
+            
+            .video-info {
+                padding: 1rem;
+            }
+            
+            .video-info h2 {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</body>
+</html>

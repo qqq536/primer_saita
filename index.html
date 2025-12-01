@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mediapolis_news_not _official</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Mediapolis_news</h1>
+        <nav>
+            <a href="index.html">Главная</a>
+            <a href="admin.php">Кабинет администратора Mediapolis_news</a>
+            <a href="счётчик.html">Счётчик до праздников</a>
+            <a href="weather.html">Погода</a>
+            <a href="videos.html">Видео</a>
+            <a href="о компании и проекте.html">О компании и проекте</a>
+        </nav>
+    </header>
+
+    <main>
+        <div id="news-container">
+            <div class="loading">Загрузка новостей...</div>
+        </div>
+    </main>
+
+    <script>
+    // Загружаем новости при загрузке страницы
+    function loadNews() {
+        fetch('get-news.php')
+            .then(response => response.json())
+            .then(news => {
+                const container = document.getElementById('news-container');
+                container.innerHTML = '';
+                
+                if (news.length === 0) {
+                    container.innerHTML = '<p class="no-news">Пока нет новостей. Будьте первым!</p>';
+                    return;
+                }
+                
+                if (news.error) {
+                    container.innerHTML = '<p class="error">Ошибка загрузки новостей</p>';
+                    return;
+                }
+                
+                news.forEach(item => {
+    let mediaHtml = '';
+    if (item.media_url) {
+        switch(item.media_type) {
+            case 'image':
+                mediaHtml = `<div class="news-media"><img src="${item.media_url}" alt="${item.title}" style="max-width: 100%; border-radius: 5px;"></div>`;
+                break;
+            case 'video':
+                mediaHtml = `<div class="news-media"><video src="${item.media_url}" controls style="max-width: 100%; border-radius: 5px;"></video></div>`;
+                break;
+            case 'audio':
+                mediaHtml = `<div class="news-media"><audio src="${item.media_url}" controls style="width: 100%;"></audio></div>`;
+                break;
+        }
+    }
+    
+    const newsItem = `
+        <article class="news-item">
+            <h2>${item.title}</h2>
+            <div class="news-meta">
+                <span class="author">👤 ${item.author}</span>
+                <span class="date">📅 ${item.created_at}</span>
+            </div>
+            ${mediaHtml}
+            <div class="news-content">${item.content}</div>
+        </article>
+    `;
+    container.innerHTML += newsItem;
+});
+            })
+            .catch(error => {
+                console.error('Ошибка:', error);
+                document.getElementById('news-container').innerHTML = 
+                    '<p class="error">Ошибка загрузки новостей. Проверьте подключение.</p>';
+            });
+    }
+
+    // Функция удаления новости
+    function deleteNews(id) {
+        if (!confirm('Вы уверены что хотите удалить эту новость?')) {
+            return;
+        }
+        
+        // Отправляем запрос на удаление
+        fetch('delete-news.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: 'id=' + id
+        })
+        .then(response => response.json())
+        .then(result => {
+            if (result.success) {
+                alert('Новость удалена!');
+                loadNews(); // Перезагружаем список новостей
+            } else {
+                alert('Ошибка: ' + result.error);
+            }
+        })
+        .catch(error => {
+            alert('Ошибка при удалении: ' + error);
+        });
+    }
+
+    // Загружаем новости при старте
+    loadNews();
+</script>
+</body>
+</html>
