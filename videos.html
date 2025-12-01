@@ -28,7 +28,7 @@
     <script>
         // Загружаем видео при загрузке страницы
         function loadVideos() {
-            fetch('get-videos.php')
+            fetch('Back end/get-videos.php')
                 .then(response => response.json())
                 .then(videos => {
                     const container = document.getElementById('videos-container');
@@ -153,4 +153,5 @@
 </body>
 
 </html>
+
 
