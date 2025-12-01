@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mediapolis_news_not _official</title>
+    <title>By Guys</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>Mediapolis_news</h1>
+        <h1>By Guys</h1>
         <nav>
             <a href="index.html">Главная</a>
-            <a href="admin.php">Кабинет администратора Mediapolis_news</a>
+            <a href="admin.php">Кабинет автора компании By Guys</a>
             <a href="счётчик.html">Счётчик до праздников</a>
             <a href="weather.html">Погода</a>
             <a href="videos.html">Видео</a>
@@ -21,7 +21,7 @@
 
     <main>
         <div id="news-container">
-            <div class="loading">Загрузка новостей...</div>
+            <div class="loading">Загрузка информации</div>
         </div>
     </main>
 
@@ -35,12 +35,12 @@
                 container.innerHTML = '';
                 
                 if (news.length === 0) {
-                    container.innerHTML = '<p class="no-news">Пока нет новостей. Будьте первым!</p>';
+                    container.innerHTML = '<p class="no-news">Пока нет информации, Игра разрабатывается!</p>';
                     return;
                 }
                 
                 if (news.error) {
-                    container.innerHTML = '<p class="error">Ошибка загрузки новостей</p>';
+                    container.innerHTML = '<p class="error">Ошибка загрузки информации</p>';
                     return;
                 }
                 
@@ -113,4 +113,5 @@
     loadNews();
 </script>
 </body>
+
 </html>
